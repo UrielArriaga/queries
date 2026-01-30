@@ -85,9 +85,10 @@ where m.chat_id  = '27474939388083'
 
 select * from mensajes m
 where m.conversacionid is not null
+
+
       
-      
-select * from conversacion c       
+select * from analisisconversacioncall c       
 where created_at   > '2026-01-19'  
 
 
@@ -95,7 +96,7 @@ where created_at   > '2026-01-19'
 select * from analisisconversacion a        
 where created_at   > '2026-01-19'      
       
-select * from analisisconversacioncall a        
+select a.recorded_at,a.transcription,* from analisisconversacioncall a        
 where created_at   > '2026-01-19'      
 
       
@@ -105,21 +106,52 @@ where a.prospectid  = 'YLlFVDbzSmc9sFJMkvKWcuE3'
       
       
       
+select	a.id,a.data_to_analyze,
+a.data_analyzed
+,a.last_analyze_date  from analysis_pipeline a
+
+
+      
+DROP TABLE IF EXISTS analysis_pipeline;
+2025-12-11
+2025-12-12
+2025-12-15
+2025-12-17
+2025-12-19
+2026-01-07
+2026-01-08
+2026-01-09
+2026-01-12
+2026-01-20
+2026-01-21
+2026-01-22
+2026-01-23
+2026-01-28
+      
+      alter table analysis_pipeline
+add column score integer default 0
+
+alter table analysis_pipeline
+add column probability_of_close integer default 0
       
       
       
       
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
+      CREATE TABLE analysis_pipeline  (
+  id SERIAL PRIMARY KEY,
+  data_to_analyze JSONB,
+  phone VARCHAR(255),
+  data_analyzed JSONB,
+  last_analyze JSONB,
+  has_previous_analysis boolean default false,
+  last_analyze_date TIMESTAMP,
+  prospectid VARCHAR(255),
+  ejecutiveid VARCHAR(255),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
       
       
       

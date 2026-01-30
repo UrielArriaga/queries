@@ -6,11 +6,13 @@ SELECT
 FROM pg_indexes
 WHERE tablename = 'conversations';
 
+select * from categories c 
+order by c."name" asc
 
 CREATE UNIQUE INDEX idx_conversations_unique ON public.conversations USING btree ("ejecutiveId", context_type, context_id, channel)
 
 
-select e.email,e.id,e.phone   from tokens t 
+select e.email,e.id,e.phone,t."token"    from tokens t 
 left join ejecutives e 
 on e.id = t."ejecutiveId" 
 where t.platform = 'android'
@@ -19,6 +21,15 @@ where t.platform = 'android'
 select c."createdAt" ,* from callhistoryraws c 
 order by c."createdAt" desc
 
+
+select * from campaingproductsgoals c 
+
+select * from limenkacampaings l 
+
+select * from limenkacampaingsproducts l 
+
+select * from specialties c 
+order by c."name" asc
 
 select * from ejecutives e 
 where e.phone  = '5581357569'
@@ -34,7 +45,6 @@ select * from conversion_analysis_state_executives t
 
 
 select * from orders o where o.folio  = 'FELMDIC257005'
-
 
 
 select e.email,p.* from prospects p
@@ -76,21 +86,40 @@ WHERE
     AND tablename = 'callhistoryraws';
 
 
+--vQ12WqVzcXiBAJxat9hk4el8
+select * from prospects p
+where p.phone  = '5551008454'
+--4922427602
+--5551008454 
+
+select * from prospects p
+where p.email  = 'Etorrescamarillo215@gmail.com'
 
 delete from callhistoryraws 
 
 
-SELECT * FROM "callhistoryraws" c
-where c."createdAt"  > '2026-01-18'
+SELECT e.username,c.call_datetime,c.phone,c.cached_name,c.duration_seconds   FROM "callhistoryraws" c
+left join ejecutives e 
+on e.id = c."ejecutiveId" 
+where c."createdAt"  > '2026-01-22'
+and c.call_datetime  < '2026-01-29 16:59:56.000 -0600'
+and e.id = '67olUrrlSoOPNTgPeRvPAUZI'
+order by c.call_datetime desc
 
 
 
 select * from callhistoryraws c 
+where c.prospectphone  = '5551008454'
 
 
 
 SELECT count(1) FROM "callhistoryraws" 
 
+
+select e.email,e.phone,g."name"  from ejecutives e 
+left join "groups" g 
+on g.id = e."groupId" 
+where g."name"  = 'helse medical'
 
 
 
@@ -169,10 +198,11 @@ $$::jsonb
 WHERE id = '6ukYaUZSIZrXY9Nv2QNw8pUq';
 
 
-
+select * from callhistoryraws c 
+where c.phone  = '4521708789'
 
 select * from orders o 
-where o.folio = 'BRDENE266002'
+where o.folio = 'JECENE264002'
 
       
 SELECT p.*
