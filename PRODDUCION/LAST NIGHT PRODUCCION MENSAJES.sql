@@ -93,8 +93,10 @@ where created_at   > '2026-01-19'
 
 
 
+
 select * from analisisconversacion a        
 where created_at   > '2026-01-19'      
+order by fecha_conversacion asc
       
 select a.recorded_at,a.transcription,* from analisisconversacioncall a        
 where created_at   > '2026-01-19'      
@@ -107,8 +109,9 @@ where a.prospectid  = 'YLlFVDbzSmc9sFJMkvKWcuE3'
       
       
 select	a.id,a.data_to_analyze,
-a.data_analyzed
+a.data_analyzed,a.last_analyze 
 ,a.last_analyze_date  from analysis_pipeline a
+order by a.last_analyze_date asc
 
 
       
@@ -135,9 +138,14 @@ alter table analysis_pipeline
 add column probability_of_close integer default 0
       
       
-      
-      
-      
+select * from conversacion c       
+order by created_at desc  
+
+select * from analisisconversacion a       
+order by a.created_at desc
+
+select * from analisisconversacioncall  a 
+order by a.created_at desc
       
       CREATE TABLE analysis_pipeline  (
   id SERIAL PRIMARY KEY,

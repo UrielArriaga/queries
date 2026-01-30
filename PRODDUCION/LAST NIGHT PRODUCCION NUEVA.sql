@@ -103,8 +103,10 @@ left join ejecutives e
 on e.id = c."ejecutiveId" 
 where c."createdAt"  > '2026-01-22'
 and c.call_datetime  < '2026-01-29 16:59:56.000 -0600'
-and e.id = '67olUrrlSoOPNTgPeRvPAUZI'
-order by c.call_datetime desc
+and e.email  = 'ana.martinez@chisonmexico.com'
+--and e.username  = 'YUO'
+--and e.id = '67olUrrlSoOPNTgPeRvPAUZI'
+order by c.call_datetime asc
 
 
 
